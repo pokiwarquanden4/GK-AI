@@ -1,0 +1,40 @@
+body {
+    overflow: none;
+}
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.controller {
+    position: absolute;
+    left: 0;
+}
+.main {
+
+}
+.robot {
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 1;
+}
+.pill {
+    max-width: 100%;
+    max-height: 100%;
+}
+.wall {
+    max-width: 100%;
+    max-height: 100%;
+}
+.patient{
+    max-width: 100%;
+    max-height: 100%;
+}
+.game {
+    display: grid;
+    grid-template-columns: repeat(50, 1fr);
+    grid-template-rows: repeat(26, 1fr);
+    width: 1300px;
+    height: 676px;
+    background-color: #ccc;
+}
