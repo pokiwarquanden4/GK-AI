@@ -1,0 +1,158 @@
+import { map } from "./wall.js";
+
+const robotPosition = { x: 2, y: 2 };
+let inputDirection = { x: 0, y: 0 };
+const hospitalMap = map()
+let path = null
+let pathIndex = 0
+
+export const setPath = (result) => {
+  path = result
+  console.log(result)
+}
+
+const robotMove = (inputDirection) =>{
+  robotPosition.x += inputDirection.x;
+  robotPosition.y += inputDirection.y;
+}
+
+const stopRobot = () => {
+  inputDirection = {x: 0, y: 0}
+}
+
+const handleDirection = (direction) => {
+  if(direction.x - robotPosition.x === 1){
+    inputDirection.x = inputDirection.x + 1
+  }
+  if(direction.y - robotPosition.y === 1){
+    inputDirection.y = inputDirection.y + 1
+  }
+  if(direction.x - robotPosition.x === -1){
+    inputDirection.x = inputDirection.x - 1
+  }
+  if(direction.y - robotPosition.y === -1){
+    inputDirection.y = inputDirection.y - 1
+  }
+
+}
+
+export function updateRobot() {
+  if(pathIndex !== path.length - 1){
+    pathIndex++ 
+    handleDirection(path[pathIndex])
+    
+    const nextPosition = hospitalMap[robotPosition.y + inputDirection.y -1][robotPosition.x + inputDirection.x -1]
+  
+    switch(nextPosition) {
+      case 'pill':
+        console.log("get pill")
+        stopRobot()
+        break 
+      case 'human':
+        console.log("human")
+        stopRobot()
+        break 
+      case 'wall':
+        console.log("block")
+        stopRobot()
+        break 
+      default:
+        robotMove(inputDirection)
+  
+    }
+  } 
+}
+
+export const robotPlace = () => {
+  return robotPosition
+}
+
+export function drawRobot(hospital) {
+
+  const robotElement = document.createElement("img");
+  robotElement.style.gridRowStart = robotPosition.y;
+  robotElement.style.gridColumnStart = robotPosition.x;
+  robotElement.classList.add("robot");
+  robotElement.src = "img/robot.png";
+
+  hospital.appendChild(robotElement);
+}
+import { map } from "./wall.js";
+
+const robotPosition = { x: 2, y: 2 };
+let inputDirection = { x: 0, y: 0 };
+const hospitalMap = map()
+let path = null
+let pathIndex = 0
+
+export const setPath = (result) => {
+  path = result
+  console.log(result)
+}
+
+const robotMove = (inputDirection) =>{
+  robotPosition.x += inputDirection.x;
+  robotPosition.y += inputDirection.y;
+}
+
+const stopRobot = () => {
+  inputDirection = {x: 0, y: 0}
+}
+
+const handleDirection = (direction) => {
+  if(direction.x - robotPosition.x === 1){
+    inputDirection.x = inputDirection.x + 1
+  }
+  if(direction.y - robotPosition.y === 1){
+    inputDirection.y = inputDirection.y + 1
+  }
+  if(direction.x - robotPosition.x === -1){
+    inputDirection.x = inputDirection.x - 1
+  }
+  if(direction.y - robotPosition.y === -1){
+    inputDirection.y = inputDirection.y - 1
+  }
+
+}
+
+export function updateRobot() {
+  if(pathIndex !== path.length - 1){
+    pathIndex++ 
+    handleDirection(path[pathIndex])
+    
+    const nextPosition = hospitalMap[robotPosition.y + inputDirection.y -1][robotPosition.x + inputDirection.x -1]
+  
+    switch(nextPosition) {
+      case 'pill':
+        console.log("get pill")
+        stopRobot()
+        break 
+      case 'human':
+        console.log("human")
+        stopRobot()
+        break 
+      case 'wall':
+        console.log("block")
+        stopRobot()
+        break 
+      default:
+        robotMove(inputDirection)
+  
+    }
+  } 
+}
+
+export const robotPlace = () => {
+  return robotPosition
+}
+
+export function drawRobot(hospital) {
+
+  const robotElement = document.createElement("img");
+  robotElement.style.gridRowStart = robotPosition.y;
+  robotElement.style.gridColumnStart = robotPosition.x;
+  robotElement.classList.add("robot");
+  robotElement.src = "img/robot.png";
+
+  hospital.appendChild(robotElement);
+}

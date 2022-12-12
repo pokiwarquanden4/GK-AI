@@ -1,3 +1,4 @@
+
 import { drawHuman, updateHuman } from "./patient.js";
 import { drawPill, updatePill } from "./pill.js";
 import { updateRobot, drawRobot } from "./robot.js";
@@ -20,6 +21,8 @@ function main(currentTime) {
 
 window.requestAnimationFrame(main);
 
+
+
 function update() {
   updateRobot();
   updatePill();
@@ -34,3 +37,5 @@ function draw() {
   drawWall(hospital);
   drawHuman(hospital)
 }
+
+

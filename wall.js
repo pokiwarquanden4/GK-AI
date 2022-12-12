@@ -37,6 +37,7 @@ let humanPosition =[];
 for(let i=0 ;i<mainMap.length ;i++){
     for(let j=0; j<mainMap[i].length ; j++){
         if(mainMap[i][j] === w){
+            console.log()
             wallPosition.push({x: j+1, y: i+1})
         }
         if(mainMap[i][j] === p){
@@ -64,7 +65,6 @@ export function updateWall() {}
 
 export function drawWall(hospital) {
   wallPosition.forEach((position) => {
-    
     const wallElement = document.createElement("img");
     wallElement.style.gridRowStart = position.y;
     wallElement.style.gridColumnStart = position.x;
