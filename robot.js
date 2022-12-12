@@ -21,7 +21,6 @@ const stopRobot = () => {
 }
 
 const handleInputPosition = (position) => {
-  console.log(position)
   if(position.x - robotPosition.x === 1 && position.y - robotPosition.y === 0){
     inputDirection = { x: 1, y: 0 };
   }
@@ -44,7 +43,6 @@ const handleInputPosition = (position) => {
     inputDirection = { x: 0, y: -1 };
   }
   if(position.x - robotPosition.x === 0 && position.y - robotPosition.y === 1){
-    console.log('in')
     inputDirection = { x: 0, y: 1 };
   }
 }
