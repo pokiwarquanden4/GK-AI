@@ -9,27 +9,32 @@ export const AStar = (position) => {
     
     const currentPosition = position
     const hospitalMap = map()
-    const goalPosition = {x: 2, y:5}
+    const goalPosition = {x: 5, y:2}
     const tree = [{value: getDirectDistance(currentPosition, goalPosition),position: currentPosition ,tree: null, treeClass: 0, key: true, path: [currentPosition]}]
     let minOfTree = {value: 999999999, position: null};
     let moveMent =[currentPosition]
-    let check = []
+    const trackedPath = [currentPosition]
     console.log(tree)
     
     const pushTree =  (currentPosition, currentTree, newMovement, treeClass = 1) => {
         currentTree.forEach((branch, index)=>{
             if(branch.key === true){
-                for(let i=0; i<newMovement.length ; i++){
-                    newMovement[i].treeClass = treeClass
-                    newMovement[i].path = [...branch.path, {x: newMovement[i].position.x, y: newMovement[i].position.y }]
+                if(newMovement.length !== 0){
+                    for(let i=0; i<newMovement.length ; i++){
+                        newMovement[i].treeClass = treeClass
+                        newMovement[i].path = [...branch.path, {x: newMovement[i].position.x, y: newMovement[i].position.y }]
+                    }
+                    branch.tree = newMovement
+                    return 'Found It'
+                }else{
+                    branch.tree = 'Blocked'
                 }
-                branch.tree = newMovement
-                return 'Found It'
+                
             }else {
                 if(index === currentTree.length - 1){
                     const newTreeClass = treeClass + 1
                     currentTree.forEach((branch) => {
-                        if(branch.tree){
+                        if(branch.tree && branch.tree !== 'Blocked'){
                             pushTree(currentPosition, branch.tree, newMovement, newTreeClass) 
                         }
                     })
@@ -49,7 +54,7 @@ export const AStar = (position) => {
             }
             if(index === currentTree.length - 1){
                 currentTree.forEach((branch) => {
-                    if(branch.tree){
+                    if(branch.tree && branch.tree !== 'Blocked'){
                         setMinOfTree(branch.tree)
                     }
                 })
@@ -60,12 +65,11 @@ export const AStar = (position) => {
     const resetTree = (currentTree,ignoreIndex, treeClass, position) => {
         currentTree.forEach((branch,index)=>{
             if(ignoreIndex !== index || treeClass !== branch.treeClass || branch.position.x !== position.x || branch.position.y !== position.y ){
-
                 branch.key = false
             }
             if(index === currentTree.length - 1){
                 currentTree.forEach((branch) => {
-                    if(branch.tree){
+                    if(branch.tree && branch.tree !== 'Blocked'){
                         resetTree(branch.tree,ignoreIndex, treeClass, position)
                     }
                 })
@@ -82,7 +86,7 @@ export const AStar = (position) => {
             }
             if(index === currentTree.length - 1){
                 currentTree.forEach((branch) => {
-                    if(branch.tree){
+                    if(branch.tree && branch.tree !== 'Blocked'){
                         setMovement(branch.tree)
                     }
                 })
@@ -96,7 +100,17 @@ export const AStar = (position) => {
         
         nextPosition.forEach((position)=>{
             if(hospitalMap[position.y - 1][position.x - 1] !== 'wall'){
-                newMovement.push({value: getDirectDistance(position, goalPosition) + moveMent.length,position: position, tree:null})
+                let checked = true
+                for(let i=0; i<trackedPath.length; i++){
+                    if(trackedPath[i].x === position.x && trackedPath[i].y === position.y){
+                        checked = false
+                        break
+                    }
+                }
+                if(checked){
+                    trackedPath.push(position)
+                    newMovement.push({value: getDirectDistance(position, goalPosition) + moveMent.length,position: position, tree:null})
+                }  
             }
         })
         pushTree(currentPosition, tree, newMovement)
@@ -105,32 +119,8 @@ export const AStar = (position) => {
         minOfTree = {value: 999999999, position: null};
         setMinOfTree(tree)
         setMovement(tree)
-        // // if(moveMent.length === 12){
-        // //     for(let i=0; i<moveMent.length; i++){
-        // //         if(moveMent[i].x === 8 && moveMent[i].y === 3){
-        // //             // console.log(tree)
-        // //             // console.log(moveMent)
-        // //             console.log(minOfTree)
-        // //         }
-        // //     }
-        // // }
-        // if(moveMent.length === 12){
-        //     for(let i=0; i<check.length ; i++){
-        //         for(let j=0; j<check[i].length ; j++){
-        //             if(check[i][j].x !== moveMent[j].x || check[i][j].y !== moveMent[j].y){
-        //                 break
-        //             }
-        //             if(j === check[i].length - 1){
-        //                 console.log("The Same")
-        //             }
-        //         }
-        //     }
-        //     console.log(check.length)
-        //     check.push(moveMent)
-        //     // console.log(moveMent)
-        //     // console.log(minOfTree.value)
-        // }
-       
+
+        // console.log(moveMent)
 
         return minOfTree.position
     }
@@ -140,13 +130,11 @@ export const AStar = (position) => {
         const left = { x: currentPosition.x , y: currentPosition.y - 1}
         const right = { x: currentPosition.x, y: currentPosition.y + 1}
         const bottom = { x: currentPosition.x + 1, y: currentPosition.y}
-       
         const nextPosition = [top,  left, right , bottom ]
     
         //Đệ quy
         const newPosition =  getNextPosition(nextPosition)
         if(newPosition.x === goalPosition.x && newPosition.y === goalPosition.y ){
-            
             finalPath(tree)
         }else{
             handleMovement(newPosition)
@@ -161,7 +149,7 @@ export const AStar = (position) => {
             }
             if(index === currentTree.length - 1){
                 currentTree.forEach((branch) => {
-                    if(branch.tree){
+                    if(branch.tree && branch.tree !== 'Blocked'){
                         finalPath(branch.tree)
                     }
                 })

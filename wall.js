@@ -3,7 +3,11 @@ const p= 'pill'
 const h= 'human'
 const mainMap = [
     [w,w,w,w,w,w,w,w,w],
-    [w,0,0,w,w,w,w,w,w],
+    [w,0,0,w,h,0,0,0,w],
+    [w,0,0,w,w,w,w,0,w],
+    [w,0,0,w,0,0,0,0,w],
+    [w,0,0,w,0,0,w,0,w],
+    [w,0,0,w,w,w,w,0,w],
     [w,0,0,0,0,0,0,0,w],
     [w,w,w,w,w,w,w,0,w],
     [w,h,0,0,0,0,0,0,w],

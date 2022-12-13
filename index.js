@@ -5,7 +5,7 @@ import { updateRobot, drawRobot } from "./robot.js";
 import { drawWall, updateWall } from "./wall.js";
 
 let lastRenderTime = 0;
-const GAME_SPEED = 1;
+const GAME_SPEED = 4;
 const hospital = document.querySelector(".game");
 
 function main(currentTime) {
