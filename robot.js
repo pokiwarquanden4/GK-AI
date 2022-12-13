@@ -1,7 +1,7 @@
 import { map } from "./wall.js";
 import { getResult, AStar } from "./Movement.js";
 
-const robotPosition = { x: 3, y: 2 };
+const robotPosition = { x: 2, y: 2 };
 let inputDirection = { x: 0, y: 0 };
 const hospitalMap = map()
 let path = null
@@ -24,20 +24,8 @@ const handleInputPosition = (position) => {
   if(position.x - robotPosition.x === 1 && position.y - robotPosition.y === 0){
     inputDirection = { x: 1, y: 0 };
   }
-  if(position.x - robotPosition.x === 1 && position.y - robotPosition.y === 1){
-    inputDirection = { x: 1, y: 1 };
-  }
-  if(position.x - robotPosition.x === 1 && position.y - robotPosition.y === -1){
-    inputDirection = { x: 1, y: -1 };
-  }
   if(position.x - robotPosition.x === -1 && position.y - robotPosition.y === 0){
     inputDirection = { x: -1, y: 0 };
-  }
-  if(position.x - robotPosition.x === -1 && position.y - robotPosition.y === 1){
-    inputDirection = { x: -1, y: 1 };
-  }
-  if(position.x - robotPosition.x === -1 && position.y - robotPosition.y === -1){
-    inputDirection = { x: -1, y: -1 };
   }
   if(position.x - robotPosition.x === 0 && position.y - robotPosition.y === -1){
     inputDirection = { x: 0, y: -1 };
