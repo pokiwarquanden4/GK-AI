@@ -11,6 +11,7 @@ export function drawHuman(hospital, check) {
     humanElement.classList.add("patient");
     if(check){
       humanElement.classList.add('checkPatient');
+      humanElement.position = position
     }
     humanElement.src = "img/patient.png";
     hospital.appendChild(humanElement);
@@ -24,6 +25,7 @@ export function drawHuman(hospital, check) {
     humanElement.classList.add("noPatient");
     if(check){
       humanElement.classList.add('checkNoPatient');
+      humanElement.position = position
     }
     humanElement.src = "img/noPatient.png";
     hospital.appendChild(humanElement);

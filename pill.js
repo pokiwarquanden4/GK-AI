@@ -2,7 +2,6 @@ import { pillPlace, pillCovidPlace, recoverPillPlace, headachePillPlace } from "
 
 export function updatePill() {}
 
-
 export function drawPill(hospital) {
   const pillPosition = pillPlace()
   pillPosition.forEach((position) => {

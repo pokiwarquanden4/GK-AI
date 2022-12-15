@@ -8,12 +8,14 @@ let inputDirection = { x: 0, y: 0 };
 const hospitalMap = map()
 let path = null
 let pathIndex = 0
+let nextStepPosition = null
 
 //A* 
-export const setPath = (currentPosition, goalPosition) => {
+export const setPath = (currentPosition, goalPosition, nextStep) => {
   AStar({...currentPosition}, {...goalPosition})
   path = getResult()
   pathIndex = 0
+  nextStepPosition = nextStep
 }
 
 const robotMove = (inputDirection) =>{
@@ -76,18 +78,22 @@ export function updateRobot() {
           }
           robotMove(inputDirection)
           stopRobot()
-          break
-        case 'pill':
+          break 
+        case 'human':
           if(pathIndex === path.length){
-            console.log("get pill")
+            
           }
           robotMove(inputDirection)
           stopRobot()
-          
           break
-        case 'human':
-          if(pathIndex === path.length){
-            console.log("human")
+        case 'pillSick':
+        case 'covidPill':
+        case 'recoverPill':
+        case 'headachePill':
+          console.log(nextStepPosition)
+          if(pathIndex === path.length && nextStepPosition){
+            setPath(getPosition(), nextStepPosition)
+            nextStepPosition = null
           }
           robotMove(inputDirection)
           stopRobot()

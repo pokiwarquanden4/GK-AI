@@ -1,4 +1,7 @@
 import { draw } from "../index.js";
+import { getHeadachePillPlace, getPillCovidPlace, getPillPlace, getRecoverPillPlace } from "../position/pillPosition.js";
+import { getPosition } from "../position/position.js";
+import { setPath } from "../robot.js";
 
 
 export const handleBringPill = () => {
@@ -43,19 +46,30 @@ const handleHospitalMap = (pillName) => {
     const patients = document.querySelectorAll('.checkPatient')
     const noPatients = document.querySelectorAll('.checkNoPatient')
 
-
-    const handlePatient = () => {
-        console.log("yes")
-    }
     for(let i=0; i<patients.length ; i++){
-        patients[i].addEventListener('click', handlePatient)
+        patients[i].addEventListener('click', () => {
+            switch(pillName) {
+                case 'sickPill':
+                    setPath(getPosition(), getPillPlace(), patients[i].position)
+                    break
+                case 'covidPill':
+                    setPath(getPosition(), getPillCovidPlace(), patients[i].position)
+                    break
+                case 'recoverPill':
+                    setPath(getPosition(), getRecoverPillPlace(), patients[i].position)
+                    break
+                case 'headachePill':
+                    setPath(getPosition(), getHeadachePillPlace(), patients[i].position)
+                    break
+            }
+            
+        })
     }
-    
-    const handleNoPatient = () => {
-        console.log("no")
-    }
+     
     for(let i=0; i<noPatients.length ; i++){
-        noPatients[i].addEventListener('click', handleNoPatient)
+        noPatients[i].addEventListener('click', () => {
+            console.log("No Patient")
+        })
     }
    
 }
