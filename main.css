@@ -1,34 +1,189 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     overflow: none;
 }
 .wrapper {
     position: relative;
     display: flex;
+}
+.controllingBar{
+    display: flex;
+    flex-direction: column;
+}
+.pocket, .ListPill, .map {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
     justify-content: center;
+    animation-name: expand;
+    animation-duration: 0.2s;
+    animation-fill-mode: backwards;
+    animation-timing-function: linear;
+    display: none;
+}
+.map {
+    /* display: flex; */
+}
+.map_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 1200px;
+    height: 600px;
+    background-color: #fff; 
+}
+.pillItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 1000px;
+    height: 300px;
+    background-color: #fff; 
+}
+.pillItems_item:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+.pillItems_content {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+}
+.pill_Image {
+    width: 60px;
+    height: 60px;
+}
+.listItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+}
+.items {
+    display: grid;
+    grid-template-columns:repeat(10, 1fr);
+    grid-template-rows:repeat(6, 1fr);
+    grid-gap: 1px;
+    background-color: #fff;
+    width: 700px;
+    height: 450px;
+}
+.grid_items {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+}
+.exitButton {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    background-color:rgba(0, 0, 0, 0.1);
+}
+.exitButton:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.exit {
+    width:25px;
+    height:25px;
 }
 .controller {
-    position: absolute;
-    left: 0;
+    width: 120px;
+    
+}
+
+.controller_header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.robot_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    padding: 10px 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.button + .button {
+    margin-top: 20px;
 }
 .main {
 
 }
 .robot {
-    max-width: 100%;
-    max-height: 100%;
+    width: 26px;
+    height: 26px;
     z-index: 1;
 }
 .pill {
-    max-width: 100%;
-    max-height: 100%;
+    width: 26px;
+    height: 26px;
+}
+.pillCovid {
+    width: 26px;
+    height: 26px;
+}
+.recoverPill{
+    width: 26px;
+    height: 26px;
+}
+.headachePill{
+    width: 26px;
+    height: 26px;
 }
 .wall {
-    max-width: 100%;
-    max-height: 100%;
+    width: 26px;
+    height: 26px;
 }
 .patient{
-    max-width: 100%;
-    max-height: 100%;
+    width: 26px;
+    height: 26px;
+}
+.noPatient {
+    width: 26px;
+    height: 26px;
+}
+.waitingPerson {
+    width: 26px;
+    height: 26px;
+}
+.waitingCovidPerson {
+    width: 26px;
+    height: 26px;
+}
+.waitingHealthyPerson {
+    width: 26px;
+    height: 26px;
 }
 .game {
     display: grid;
@@ -37,4 +192,47 @@ body {
     width: 1300px;
     height: 676px;
     background-color: #ccc;
+}
+.hospital_map {
+    display: grid;
+    grid-template-columns: repeat(50, 1fr);
+    grid-template-rows: repeat(26, 1fr);
+    width: 1300px;
+    height: 676px;
+    background-color: #ccc;
+}
+.exitMap {
+    background-color: #fff;
+}
+.exitMap:hover{
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+
+@keyframes expand {
+    from {
+        transform: scale(0);
+    }to {
+        transform: scale(1);
+    }
+}
+
+@keyframes increase {
+    0% {
+        transform: translateX(-100%)
+    }
+    100% {
+        transform: translateX(0%)
+    }
+}
+
+@keyframes throwToLeft {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-400%);
+        opacity: 0;
+    }
 }

@@ -1,7 +1,7 @@
 import { map } from "./wall.js"
 let result = null
 
-export const AStar = (position) => {
+export const AStar = (position, goal) => {
     const getDirectDistance = (position, goal) => {
         const result = Math.sqrt(Math.pow(position.x - goal.x, 2) + Math.pow(position.y - goal.y,2)) 
         return result
@@ -9,12 +9,11 @@ export const AStar = (position) => {
     
     const currentPosition = position
     const hospitalMap = map()
-    const goalPosition = {x: 5, y:2}
+    const goalPosition = goal
     const tree = [{value: getDirectDistance(currentPosition, goalPosition),position: currentPosition ,tree: null, treeClass: 0, key: true, path: [currentPosition]}]
     let minOfTree = {value: 999999999, position: null};
     let moveMent =[currentPosition]
     const trackedPath = [currentPosition]
-    console.log(tree)
     
     const pushTree =  (currentPosition, currentTree, newMovement, treeClass = 1) => {
         currentTree.forEach((branch, index)=>{
@@ -29,7 +28,6 @@ export const AStar = (position) => {
                 }else{
                     branch.tree = 'Blocked'
                 }
-                
             }else {
                 if(index === currentTree.length - 1){
                     const newTreeClass = treeClass + 1
@@ -120,8 +118,6 @@ export const AStar = (position) => {
         setMinOfTree(tree)
         setMovement(tree)
 
-        // console.log(moveMent)
-
         return minOfTree.position
     }
     
@@ -131,11 +127,17 @@ export const AStar = (position) => {
         const right = { x: currentPosition.x, y: currentPosition.y + 1}
         const bottom = { x: currentPosition.x + 1, y: currentPosition.y}
         const nextPosition = [top,  left, right , bottom ]
+
+        if(currentPosition.x === goalPosition.x && currentPosition.y === goalPosition.y){
+            finalPath(tree)
+            return
+        }
     
         //Đệ quy
-        const newPosition =  getNextPosition(nextPosition)
-        if(newPosition.x === goalPosition.x && newPosition.y === goalPosition.y ){
+        const newPosition = getNextPosition(nextPosition)
+        if(newPosition.x === goalPosition.x && newPosition.y === goalPosition.y){
             finalPath(tree)
+            return
         }else{
             handleMovement(newPosition)
         }
@@ -163,6 +165,5 @@ export const AStar = (position) => {
 
 
 export const getResult = () => {
-    console.log(result)
     return result
 }
