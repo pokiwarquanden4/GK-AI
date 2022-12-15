@@ -3,9 +3,10 @@ import { getHeadachePillPlace, getPillCovidPlace, getPillPlace, getRecoverPillPl
 import { getPosition } from "../position/position.js";
 import { setPath } from "../robot.js";
 
-
+const pillLists = document.querySelector('.ListPill')
+const map = document.querySelector('.map')
 export const handleBringPill = () => {
-    const pillLists = document.querySelector('.ListPill')
+   
     const exit = document.querySelector('.exitListPill')
     const sickPill = document.querySelector('.sickPill')
     const covidPill = document.querySelector('.covidPill')
@@ -33,7 +34,6 @@ export const handleBringPill = () => {
 }
 
 const handleHospitalMap = (pillName) => {
-    const map = document.querySelector('.map')
     const exit = document.querySelector('.exitMap')
     map.style.display = 'flex'
     exit.addEventListener('click', () => {
@@ -51,15 +51,23 @@ const handleHospitalMap = (pillName) => {
             switch(pillName) {
                 case 'sickPill':
                     setPath(getPosition(), getPillPlace(), patients[i].position)
+                    pillLists.style.display = 'none'
+                    map.style.display = 'none'
                     break
                 case 'covidPill':
                     setPath(getPosition(), getPillCovidPlace(), patients[i].position)
+                    pillLists.style.display = 'none'
+                    map.style.display = 'none'
                     break
                 case 'recoverPill':
                     setPath(getPosition(), getRecoverPillPlace(), patients[i].position)
+                    pillLists.style.display = 'none'
+                    map.style.display = 'none'
                     break
                 case 'headachePill':
                     setPath(getPosition(), getHeadachePillPlace(), patients[i].position)
+                    pillLists.style.display = 'none'
+                    map.style.display = 'none'
                     break
             }
             
