@@ -1,10 +1,10 @@
-
 import { drawHuman, updateHuman } from "./patient.js";
 import { drawPill, updatePill } from "./pill.js";
 import { updateRobot, drawRobot } from "./robot.js";
 import { drawWaiting, updateWaiting } from "./waitingPerson.js";
 import { drawWall, updateWall } from "./wall.js";
-import {controllers} from "./controllers/controllers.js";
+import { controllers } from "./controllers/controllers.js";
+import { drawPath, updatePath } from "./path.js";
 
 let lastRenderTime = 0;
 const GAME_SPEED = 15;
@@ -24,33 +24,33 @@ function main(currentTime) {
 window.requestAnimationFrame(main);
 
 //Controllers
-controllers()
+controllers();
 
 function update(hospital) {
   updateRobot();
   updatePill();
   updateWall();
-  updateHuman()
-  updateWaiting()
+  updateHuman();
+  updateWaiting();
+  updatePath();
 }
 
 export function draw(hospital, check) {
-  if(!check){
+  if (!check) {
     hospital.innerHTML = "";
     drawRobot(hospital);
     drawPill(hospital);
     drawWall(hospital);
-    drawHuman(hospital)
-    drawWaiting(hospital)
-  }else{
+    drawHuman(hospital);
+    drawWaiting(hospital);
+    drawPath(hospital);
+  } else {
     hospital.innerHTML = "";
     drawRobot(hospital);
     drawPill(hospital);
     drawWall(hospital);
-    drawHuman(hospital, true)
-    drawWaiting(hospital)
+    drawHuman(hospital, true);
+    drawWaiting(hospital);
+    drawPath(hospital);
   }
-  
 }
-
-
