@@ -54,6 +54,12 @@ const handleHospitalMap = (pillName) => {
 
   for (let i = 0; i < patients.length; i++) {
     patients[i].style.cursor = "pointer";
+    patients[i].addEventListener("mouseover", () => {
+      patients[i].style.opacity = "0.7";
+    });
+    patients[i].addEventListener("mouseleave", () => {
+      patients[i].style.opacity = "1";
+    });
     patients[i].addEventListener("click", () => {
       switch (pillName) {
         case "sickPill":
