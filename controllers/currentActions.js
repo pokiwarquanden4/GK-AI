@@ -12,7 +12,7 @@ export const defaultActions = () => {
 };
 
 export const pushPatientActions = () => {
-  currentImg.src = "";
+  currentImg.src = "img/pushPatientToBed.png";
   currentContent.innerHTML = "Patient To Bed";
 };
 
