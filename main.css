@@ -143,49 +143,22 @@ position: relative;
 .robot {
     width: 26px;
     height: 26px;
-    z-index: 1;
+    z-index: 100;
 }
-.pill {
+.pill, .pillCovid, .recoverPill, .headachePill {
     width: 26px;
     height: 26px;
-}
-.pillCovid {
-    width: 26px;
-    height: 26px;
-}
-.recoverPill{
-    width: 26px;
-    height: 26px;
-}
-.headachePill{
-    width: 26px;
-    height: 26px;
-    
+    z-index: 10;
 }
 .wall {
     width: 26px;
     height: 26px;
 }
-.patient{
+.patient, .noPatient, .waitingPerson, .waitingCovidPerson, .waitingHealthyPerson{
     width: 26px;
     height: 26px;
-}
-.noPatient {
-    width: 26px;
-    height: 26px;
-}
-.waitingPerson {
-    width: 26px;
-    height: 26px;
-}
-.waitingCovidPerson {
-    width: 26px;
-    height: 26px;
-}
-.waitingHealthyPerson {
-    width: 26px;
-    height: 26px;
-}
+    z-index: 10;
+}   
 .game {
     display: grid;
     grid-template-columns: repeat(50, 1fr);

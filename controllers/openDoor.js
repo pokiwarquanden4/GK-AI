@@ -16,9 +16,9 @@ const getRandomPatient = () => {
 export const handleOpenDoor = () => {
     const hospitalMap = map()
 
-    for(let i=7; i>=1 ; i--){
-        if(hospitalMap[i][23] === 0){
-            hospitalMap[i][23] = getRandomPatient()
+    for(let i=21; i>=3 ; i--){
+        if(hospitalMap[i][24] === 0){
+            hospitalMap[i][24] = getRandomPatient()
         }
     }
 }

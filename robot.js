@@ -61,7 +61,7 @@ const handleInputPosition = (position) => {
 
 const getEmptyBedSick = () => {
   for (let i = 0; i < hospitalMap.length; i++) {
-    for (let j = 0; j < 22; j++) {
+    for (let j = 0; j < 25; j++) {
       if (hospitalMap[i][j] === "noHuman") {
         return { x: j + 1, y: i + 1 };
       }
@@ -70,7 +70,7 @@ const getEmptyBedSick = () => {
 };
 const getEmptyBedCovid = () => {
   for (let i = 0; i < hospitalMap.length; i++) {
-    for (let j = 22; j < hospitalMap[i].length; j++) {
+    for (let j = 25; j < hospitalMap[i].length; j++) {
       if (hospitalMap[i][j] === "noHuman") {
         return { x: j + 1, y: i + 1 };
       }
@@ -139,17 +139,21 @@ export function updateRobot() {
         case "hospital Gate":
           if (pathIndex === path.length) {
             const status =
-              hospitalMap[robotPosition.y + inputDirection.y - 2][
-                robotPosition.x + inputDirection.x - 1
+              hospitalMap[robotPosition.y + inputDirection.y - 1][
+                robotPosition.x + inputDirection.x
               ];
+            console.log("Result: " + status)
             if (status) {
-              hospitalMap[7][23] = hospitalMap[6][23];
-              hospitalMap[6][23] = hospitalMap[5][23];
-              hospitalMap[5][23] = hospitalMap[4][23];
-              hospitalMap[4][23] = hospitalMap[3][23];
-              hospitalMap[3][23] = hospitalMap[2][23];
-              hospitalMap[2][23] = hospitalMap[1][23];
-              hospitalMap[1][23] = 0;
+              for(let i = 3; i <= 21;i++){
+                console.log(hospitalMap[i][24])
+                if(i===21){
+                  hospitalMap[i][24] = 0
+                }else{
+                  hospitalMap[i][24] = hospitalMap[i+1][24]
+                }
+                
+              }
+              
               switch (status) {
                 case "waiting":
                   bringPatientToBed(getEmptyBedSick());
