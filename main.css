@@ -14,7 +14,7 @@ body {
     flex-direction: column;
 }
 .pocket, .ListPill, .map {
-    z-index: 100;
+    z-index: 1000;
     position: absolute;
     top: 0;
     width: 100%;
@@ -37,8 +37,8 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 1200px;
-    height: 600px;
+    width: 1300px;
+    height: 676px;
     background-color: #fff; 
 }
 .pillItems {
